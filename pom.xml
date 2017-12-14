@@ -7,6 +7,10 @@
   <version>1.0-SNAPSHOT</version>
   <modules>
     <module>tutorial_perfect</module>
+    <module>tutorial_utils</module>
+    <module>tutorial_repository</module>
+    <module>tutorial_service</module>
+    <module>tutorial_domain</module>
   </modules>
   <packaging>pom</packaging>
 
