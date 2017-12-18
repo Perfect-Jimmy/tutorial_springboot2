@@ -1,6 +1,6 @@
 package com.tutorial.configuration;
 
-import com.tutorial.utils.ThreadPoolParam;
+import com.tutorial.domain.configuration.ThreadPoolParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
