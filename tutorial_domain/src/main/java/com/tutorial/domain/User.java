@@ -44,4 +44,16 @@ public class User implements Serializable{
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date birthDay;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", userDesc='" + userDesc + '\'' +
+                ", inCome=" + inCome +
+                ", address='" + address + '\'' +
+                ", birthDay=" + birthDay +
+                '}';
+    }
 }
