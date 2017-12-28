@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by Jimmy. 2017/12/28  15:36
+ *  @Consumes(MediaType.TEXT_PLAIN)
+ @Produces(MediaType.TEXT_PLAIN)
  */
 @RestController
 @RequestMapping("/rest")
