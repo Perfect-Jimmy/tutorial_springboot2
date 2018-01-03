@@ -4,9 +4,9 @@
 2. 解压 rpm -ivh elasticsearch-6.1.1.rpm 安装路径在/usr/share/elasticsearch
 3. 启动服务 service elasticsearch start
    或者命令
-   sudo chkconfig --add elasticsearch   # configure Elasticsearch to start automatically when the system boots up
-   sudo -i service elasticsearch start
-   sudo -i service elasticsearch stop
+   sudo chkconfig --add elasticsearch  
+   sudo -i service elasticsearch start  
+   sudo -i service elasticsearch stop  
 4. 测试是否安装成功 curl http://localhost:9200/
 5. 日志目录 /var/log/elasticsearch/
 
