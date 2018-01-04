@@ -31,10 +31,10 @@
 1. 上传rpm包到路径/usr/search
 2. 解压 rpm -ivh filebeat-6.1.1-x86_64.rpm  安装路径在/usr/share/filebeat
 3. 修改yml文件,yml路径在/etc/filebeat
-4. 命令  
-   sudo /etc/init.d/filebeat start
-   sudo /etc/init.d/filebeat restart
-   sudo /etc/init.d/filebeat status
+4. 命令    
+   sudo /etc/init.d/filebeat start  
+   sudo /etc/init.d/filebeat restart  
+   sudo /etc/init.d/filebeat status  
 5. 日志目录 /var/log/filebeat
 
     
