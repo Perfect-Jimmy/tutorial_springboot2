@@ -48,10 +48,32 @@
 
 
 > netstat -tunlp 查看开放的端口和监听信息
-    
-> some
-1. es外网访问
+
+***
+
+> 配置文件参数配置-elasticsearch
+1. 外网访问
 ```
 network.host: 0.0.0.0  # 设置
 discovery.zen.ping.unicast.hosts: ["0.0.0.0"] # 设置
+```
+
+> 配置文件参数配置-filebeat
+```
+#=========================== Filebeat prospectors =============================
+type: log
+enabled: true
+paths:
+    - D:\data\logs\yst-search_service.log
+document_type: service_log
+    
+#============================= Filebeat modules ===============================
+#================================ Outputs =====================================
+#-------------------------- Elasticsearch output ------------------------------
+output.elasticsearch:
+  hosts: ["36.111.193.248:9200"] #输出到elasticsearch地址
+  #protocol: "https"
+  #username: "elastic"
+  #password: "changeme"
+
 ```
