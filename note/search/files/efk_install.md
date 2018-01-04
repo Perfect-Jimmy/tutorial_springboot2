@@ -37,6 +37,10 @@
    sudo /etc/init.d/filebeat status  
 5. 日志目录 /var/log/filebeat
 
+> 安装logstash 
+1. 上传rpm包到路径/usr/search  
+2. 解压rpm -ivh logstash-6.1.1.rpm  
+3. 修改yml文件,yml路径在/etc/logstash   
     
 > 防火墙打开9200端口
 1. 查看防火墙  systemctl status firewalld  
