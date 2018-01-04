@@ -8,5 +8,5 @@
 out
 gen
 .gitignore
-.idea/workspace.xml
+.idea/*.xml
 tutorial_perfect/target/
