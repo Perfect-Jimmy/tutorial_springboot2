@@ -49,9 +49,6 @@
 
 input {
      stdin{}
-     beats {
-         port => "5044"
-       }
  }
 
 output {
