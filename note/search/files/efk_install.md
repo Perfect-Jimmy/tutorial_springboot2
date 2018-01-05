@@ -49,6 +49,9 @@
 
 input {
      stdin{}
+     beats {
+         port => "5044"
+       }
  }
 
 output {
@@ -63,6 +66,7 @@ output {
   
 执行:/usr/share/logstash/bin/logstash -t -f /etc/logstash/conf.d/test.conf 
 其中-t表示测试配置文件但是并不启动,-f表示指定测试文件
+/usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/test.conf 
 ```
 
     
