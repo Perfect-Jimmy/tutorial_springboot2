@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
@@ -16,7 +15,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-import redis.clients.jedis.JedisPoolConfig;
 
 /**
  * Created by Jimmy. 2017/12/18  16:03
@@ -24,7 +22,7 @@ import redis.clients.jedis.JedisPoolConfig;
  * http://www.cnblogs.com/skyessay/p/6485187.html
  * http://www.jianshu.com/p/7bf5dc61ca06
  */
-@Configuration
+//@Configuration
 public class RedisConfiguration {
     @Value("${redis.pool.db1}")
     private int redisDB1;
@@ -100,13 +98,13 @@ public class RedisConfiguration {
         JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
         jedisConnectionFactory.setHostName(redisPoolParam.getHost());
         jedisConnectionFactory.setPort(redisPoolParam.getPort());
-        JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
+      /*  JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setMinIdle(redisPoolParam.getMinIdle());
         jedisPoolConfig.setMaxIdle(redisPoolParam.getMaxIdle());
         jedisPoolConfig.setMaxWaitMillis(redisPoolParam.getTimeOut());
         jedisPoolConfig.setTestWhileIdle(true);
         jedisPoolConfig.setMaxTotal(redisPoolParam.getMaxActive());
-        jedisConnectionFactory.setPoolConfig(jedisPoolConfig);
+        jedisConnectionFactory.setPoolConfig(jedisPoolConfig);*/
         return  jedisConnectionFactory;
     }
 

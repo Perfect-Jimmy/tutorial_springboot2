@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Jimmy. 2017/12/15  17:42
@@ -41,8 +42,8 @@ public class StudentMongoServiceImpl implements StudentMongoService {
     }
 
     @Override
-    public Student findById(String id) {
-        return studentMongoRepository.findOne(id);
+    public Optional<Student> findById(String id) {
+        return studentMongoRepository.findById(id);
     }
 
     @Override
