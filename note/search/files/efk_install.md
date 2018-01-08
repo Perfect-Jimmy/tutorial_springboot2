@@ -19,7 +19,7 @@
 4. 命令  
    sudo chkconfig --add kibana   # 设置自动启动    
    sudo -i service kibana start  
-   sudo -i service kibana stop 
+   sudo -i service kibana stop  
    sudo -i service kibana restart   
    或者    
    sudo /bin/systemctl daemon-reload  
