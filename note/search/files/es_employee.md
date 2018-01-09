@@ -28,7 +28,23 @@ curl -XGET 'localhost:9200/tutorial/employee/_search?pretty' -d '
 ```
 
 
-
+> 查询Smith且age>30的employee
+```
+curl -XGET 'localhost:9200/tutorial/employee/_search?pretty' -d '
+{
+  "query": { 
+         "bool": { 
+              "must": [
+                { "match": { "last_name": "Smith"}}
+              ],
+              "filter": [ 
+                { "range": { "age": { "gte": 30}}} 
+              ]
+            }
+  }
+}
+'
+```
 ### 全文搜索
 
 ### 短语搜索
