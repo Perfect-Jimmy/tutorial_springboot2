@@ -1,13 +1,18 @@
 ### elasticsearch相关概念
+> 倒排索引(inverted index)
+```
+
+```
 > es与mysql数据库对比
 
-| ES | Mysql |
+| Elasticsearch | Relational DB |
 |----|-----|
 | Index | DataBase| 
 | Type | Table | 
 | Document | Row |
 | Mapping | Schema |
 
+*注:如果文档已经存在，新的文档将覆盖旧的文档*
 
 > shard 分片
 ```
