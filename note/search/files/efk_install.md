@@ -1,4 +1,4 @@
-###### centos7安装efk(elasticsearch+filebeat+kibana)
+### centos7安装efk(elasticsearch+filebeat+kibana)
 > 安装elasticsearch 
 1. 上传rpm包到路径/usr/search
 2. 解压 rpm -ivh elasticsearch-6.1.1.rpm 安装路径在/usr/share/elasticsearch

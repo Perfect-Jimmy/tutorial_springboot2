@@ -1,4 +1,4 @@
-###### Restful API
+### Restful API
 > get和post区别
 
 * 哪一些情况下，浏览器会发送get请求
