@@ -12,7 +12,7 @@
 
 > 创建文档 curl -X PUT 'localhost:9200/customer/external/1?pretty' -d ' {"name": "John Doe"}'
 
-> 创建文档 curl -X POST 'localhost:9200/customer/external?pretty' -d ' {"name": "Jane Doe" }'
+> 创建文档 curl -X POST 'localhost:9200/customer/external?pretty' -d ' {"name": "Jane Doe" }'  
 *注:不指定id的时候，使用POST，elasticsearch会自动生成一个ID*
   
 > 更新文档 curl -X PUT 'localhost:9200/customer/external/1?pretty' -d ' { "name": "Jane Doe1" }'
