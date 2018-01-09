@@ -1,4 +1,4 @@
-###### elasticsearch相关概念
+### elasticsearch相关概念
 > es与mysql数据库对比
 
 | ES | Mysql |
