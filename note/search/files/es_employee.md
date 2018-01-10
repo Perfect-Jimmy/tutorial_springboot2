@@ -1,4 +1,5 @@
 ### elasticsearch restapi 使用-employee例子
+
 > 创建索引和文档 [测试数据](../data/employee.md)
 
 > 查询根据id查询employee信息
@@ -10,6 +11,12 @@ curl -XGET 'localhost:9200/tutorial/employee/1?pretty'
 ```
 curl -XGET 'localhost:9200/tutorial/employee/_search?pretty'
 ```
+
+> 查询返回指定字段:返回id为1的age字段
+```
+curl -XGET 'localhost:9200/tutorial/employee/1/?_source=age&pretty'
+```
+
 ### 查询字符串(query string)搜索
 > 查询姓氏中包含"Smith"的employee
 ```
