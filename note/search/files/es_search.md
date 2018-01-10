@@ -2,6 +2,8 @@
 
 > [检索实战数据](../data/book.md)
 
+### 全文检索
+
 > 全文检索:match 指定特定字段检索
 1. 指定title字段查询,包含"guide"
 ```
@@ -124,8 +126,8 @@ curl -XGET 'localhost:9200/tutorial/book/_search?pretty' -d '
 
 > Wildcard Query 通配符检索  
 > 通配符查询允许您指定匹配的模式,而不是整个词组(term)检索   
-> 1.?匹配任何字符  
-> 2.*匹配零个或多个字符  
+> 1.?匹配任何单个字符  
+> 2.*匹配零个或多个字符包括空字符序列  
 
 查询"t"字母开头的作者的所有记录
 ```
@@ -164,4 +166,124 @@ curl -XGET 'localhost:9200/tutorial/book/_search?pretty' -d '
 ```
 
 > Match Phrase Query 匹配短语检索:匹配短语查询要求查询字符串中的所有词都存在于文档中,按照查询字符串中指定的顺序并且彼此靠近  
-> 默认情况下,这些词必须完全相邻,但可以指定偏离值(slop value),该值指示在仍然考虑文档匹配的情况下词与词之间的偏离值
+> 默认情况下这些词必须完全相邻,但可以指定偏离值(slop value),该值指示在仍然考虑文档匹配的情况下词与词之间的偏离值
+```
+curl -XGET 'localhost:9200/tutorial/book/_search?pretty' -d '
+{
+   "query": {
+         "multi_match" : {
+                     "query": "search engine",
+                     "fields": ["title", "summary"],
+                     "type": "phrase",
+                     "slop": 3
+         }
+   },
+   "_source": [ "title", "summary", "publish_date" ]
+}
+'
+```
+
+> 匹配词组前缀检索
+> 和match_phrase查询一样,它接受一个斜率参数,使得单词的顺序和相对位置没有那么"严格"
+> 还接受max_expansions参数来限制匹配的条件数以减少资源强度
+```
+curl -XGET 'localhost:9200/tutorial/book/_search?pretty' -d '
+{
+   "query": {
+         "match_phrase_prefix" : {
+                             "summary": {
+                             "query": "search en",
+                             "slop": 3,
+                             "max_expansions": 10
+               }
+         }
+   },
+   "_source": [ "title", "summary", "publish_date" ]
+}
+'
+```
+
+> Simple Query String 简化的字符串检索
+> 是query_string查询的一个版本,分别用+ / | / - 替换了AND / OR / NOT的使用，并放弃查询的无效部分，而不是在用户出错时抛出异常
+
+对"search algorithm"一词执行模糊搜索,其中一本作者是"grant ingersoll"或"tom morton"
+```
+curl -XGET 'localhost:9200/tutorial/book/_search?pretty' -d '
+{
+   "query": {
+         "simple_query_string" : {
+                    "query": "(saerch~1 algorithm~1) + (grant ingersoll)  | (tom morton)",
+                    "fields": ["_all", "summary^2"]
+         }
+   },
+   "_source": [ "title", "summary", "publish_date" ]
+}
+'
+```
+
+
+### 结构化搜索
+> term/terms 指定字段检索
+
+1. 查询publisher为manning的数据
+```
+curl -XGET 'localhost:9200/tutorial/book/_search?pretty' -d '
+{
+   "query": {
+         "term":{
+              "publisher":"manning"
+         }
+   },
+   "_source": [ "title", "publisher", "publish_date" ]
+}
+'
+```
+2. 定多个关键词进行检索
+```
+curl -XGET 'localhost:9200/tutorial/book/_search?pretty' -d '
+{
+   "query": {
+         "terms":{
+              "publisher":["oreilly", "packt"]
+         }
+   },
+   "_source": [ "title", "publisher", "publish_date" ]
+}
+'
+```
+> 排序检索
+```
+curl -XGET 'localhost:9200/tutorial/book/_search?pretty' -d '
+{
+   "query": {
+         "term":{
+              "publisher":"manning"
+         }
+   },
+   "_source": [ "title", "publisher", "publish_date" ],
+   "sort": [
+           { "publish_date": {"order":"desc"}}
+       ]
+}
+'
+```
+
+> Range query 范围检索
+
+查询publish_date为2015的数据
+```
+curl -XGET 'localhost:9200/tutorial/book/_search?pretty' -d '
+{
+   "query": {
+         "range":{
+              "publish_date":{
+                    "gte": "2015-01-01",
+                    "lte": "2015-12-31"
+              }
+         }
+   },
+   "_source": [ "title", "publisher", "publish_date" ]
+}
+'
+```
+*注:范围查询适用于日期,数字和字符串类型字段*

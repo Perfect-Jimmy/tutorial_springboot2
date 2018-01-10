@@ -29,4 +29,12 @@ curl -XGET 'http://localhost:9200/_count?pretty' -d '
 }
 '
 ```
+> 查看所有的mapping curl 'localhost:9200/_mapping/?pretty'
+
+> 查看指定index的mapping curl 'localhost:9200/tutorial/_mapping/?pretty'
+
+> 查看指定index和type的mapping  curl 'localhost:9200/tutorial/_mapping/book?pretty'
+
+
+
 
