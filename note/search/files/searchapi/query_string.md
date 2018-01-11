@@ -4,8 +4,23 @@
 
 真正意义上的全文检索
 1. 可以在多个索引下进行无指定字段检索
-2. 可以在指定的索引/类型下进行无指定字段检索
+2. 可以在指定的索引/类型下进行无指定字段检索  
 
+全文检索,只要是包含action或者Guide的数据都会检索出来
+```
+curl -H "Content-Type:application/json" -XGET 'localhost:9200/tutorial/book/_search?pretty' -d '
+{
+  "query": { 
+        "query_string" : {
+                     "query" : "action Guide"
+        }
+     }
+}
+'
+```
+
+
+AND OR关系控制
 ```
 curl -H "Content-Type:application/json" -XGET 'localhost:9200/tutorial/book/_search?pretty' -d '
 {
