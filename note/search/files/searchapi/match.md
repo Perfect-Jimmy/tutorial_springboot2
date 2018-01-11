@@ -21,7 +21,9 @@ curl -H "Content-Type:application/json" -XGET 'localhost:9200/tutorial/book/_sea
 3. 找到匹配的文档:term查询会在倒排索引中查询"guide",然后获取到含有该词条的文档列表并返回
 4. 对每份文档打分：term查询会为每份匹配的文档计算其相关度分值_score
 
-*注:相关度分值通过综合考虑词条频度(Term Frequency)("guide"在匹配的每份文档的title字段中出现的频繁程度),倒排频度(Inverted Document Frequency)("quick"在整个索引中的所有文档的title字段中的出现程度),以及每个字段的长度(较短的字段会被认为相关度更高)来得到*
+*注:相关度分值通过综合考虑词条频度(Term Frequency)("guide"在匹配的每份文档的title字段中出现的频繁程度),
+倒排频度(Inverted Document Frequency)("guide"在整个索引中的所有文档的title字段中的出现程度),
+以及每个字段的长度(较短的字段会被认为相关度更高)来得到*
 
 > Fuzziness 模糊查询
 
