@@ -75,3 +75,7 @@ curl -H "Content-Type:application/json" -XGET 'localhost:9200/tutorial/book/_sea
  }
  '
 ```
+
+> Zero terms query 零term查询
+
+> Cutoff frequency 高低频截断
