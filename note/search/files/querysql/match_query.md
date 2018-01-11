@@ -58,7 +58,8 @@ curl -H "Content-Type:application/json" -XGET 'localhost:9200/tutorial/book/_sea
  }
  '
 ```
-*注:查询内容"Elasticsearch Guide"被分析后成为两个词条("Elasticsearch","Guide")*
+*注:查询内容"Elasticsearch Guide"被分析后成为两个词条("Elasticsearch","Guide")*  
+
 2. 查询title中包含"Elasticsearch"或者"Guide"的数据
 ```
 curl -H "Content-Type:application/json" -XGET 'localhost:9200/tutorial/book/_search?pretty' -d '
