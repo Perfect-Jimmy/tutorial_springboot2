@@ -11,6 +11,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * Created by Jimmy. 2018/1/8  22:17
+ * https://github.com/searchbox-io/Jest/tree/master/jest
+ * http://blog.csdn.net/u010466329/article/details/75020956
+ * http://blog.csdn.net/column/details/elasticsearch-action.html?&page=3
+ * https://www.felayman.com/
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = App.class)

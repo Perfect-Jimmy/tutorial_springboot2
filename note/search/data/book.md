@@ -1,6 +1,6 @@
 ### 检索实战测试数据
 ```
-curl -XPUT 'localhost:9200/tutorial/book/1?pretty' -d ' 
+curl -H "Content-Type:application/json" -XPUT 'localhost:9200/tutorial/book/1?pretty' -d ' 
 {
    "title": "Elasticsearch: The Definitive Guide", 
    "authors": ["clinton gormley", "zachary tong"],
@@ -10,7 +10,7 @@ curl -XPUT 'localhost:9200/tutorial/book/1?pretty' -d '
    "publisher": "oreilly"
 }'
 
-curl -XPUT 'localhost:9200/tutorial/book/2?pretty' -d ' 
+curl -H "Content-Type:application/json" -XPUT 'localhost:9200/tutorial/book/2?pretty' -d ' 
 {
    "title": "Taming Text: How to Find, Organize, and Manipulate It", 
    "authors": ["grant ingersoll", "thomas morton", "drew farris"], 
@@ -20,7 +20,7 @@ curl -XPUT 'localhost:9200/tutorial/book/2?pretty' -d '
    "publisher": "manning" 
 }'
 
-curl -XPUT 'localhost:9200/tutorial/book/3?pretty' -d ' 
+curl -H "Content-Type:application/json" -XPUT 'localhost:9200/tutorial/book/3?pretty' -d ' 
 {
     "title": "Elasticsearch in Action", 
     "authors": ["radu gheorge", "matthew lee hinman", "roy russo"], 
@@ -30,7 +30,7 @@ curl -XPUT 'localhost:9200/tutorial/book/3?pretty' -d '
     "publisher": "manning"
 }'
 
-curl -XPUT 'localhost:9200/tutorial/book/4?pretty' -d ' 
+curl -H "Content-Type:application/json" -XPUT 'localhost:9200/tutorial/book/4?pretty' -d ' 
 {
    "title": "Solr in Action", 
    "authors": ["trey grainger", "timothy potter"], 
@@ -41,3 +41,4 @@ curl -XPUT 'localhost:9200/tutorial/book/4?pretty' -d '
 }'
 
 ```
+

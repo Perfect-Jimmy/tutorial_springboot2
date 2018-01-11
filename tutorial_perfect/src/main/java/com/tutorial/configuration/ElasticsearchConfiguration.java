@@ -1,25 +1,40 @@
 package com.tutorial.configuration;
 
-import org.elasticsearch.client.transport.TransportClient;
-import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.InetSocketTransportAddress;
-import org.elasticsearch.transport.client.PreBuiltTransportClient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.FactoryBean;
-import org.springframework.beans.factory.InitializingBean;
+import io.searchbox.client.JestClient;
+import io.searchbox.client.JestClientFactory;
+import io.searchbox.client.config.HttpClientConfig;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 /**
  * Created by Jimmy. 2018/1/8  21:59
  */
+
 @Configuration
-public class ElasticsearchConfiguration implements FactoryBean<TransportClient>, InitializingBean, DisposableBean {
+public class ElasticsearchConfiguration{
+    @Value("${spring.elasticsearch.jest.uris}")
+    private String url;
+    @Bean
+    public JestClient jestClient(){
+        JestClientFactory factory = new JestClientFactory();
+        factory.setHttpClientConfig(new HttpClientConfig
+                .Builder(url)
+                .multiThreaded(true)
+                //Per default this implementation will create no more than 2 concurrent connections per given route
+                .defaultMaxTotalConnectionPerRoute(10)
+                // and no more 20 connections in total
+                .maxTotalConnection(10)
+                .build());
+        JestClient jestClient = factory.getObject();
+        System.out.println(jestClient);
+        return jestClient;
+    }
+}
+
+
+//@Configuration
+/*public class ElasticsearchConfiguration implements FactoryBean<TransportClient>, InitializingBean, DisposableBean {
     private static final Logger logger = LoggerFactory.getLogger(ElasticsearchConfiguration.class);
 
     @Value("${spring.data.elasticsearch.cluster-nodes}")
@@ -80,9 +95,9 @@ public class ElasticsearchConfiguration implements FactoryBean<TransportClient>,
             logger.error(e.getMessage());
         }
     }
-    /**
-     * 初始化默认的client
-     */
+    *//**
+ * 初始化默认的client
+ *//*
     private Settings settings(){
         Settings settings = Settings.builder()
                 .put("cluster.name",clusterName)
@@ -91,4 +106,4 @@ public class ElasticsearchConfiguration implements FactoryBean<TransportClient>,
         System.out.println(client);
         return settings;
     }
-}
+}*/
