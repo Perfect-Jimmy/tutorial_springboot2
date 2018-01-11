@@ -1,6 +1,6 @@
 ### Match Query
 
-基于全文字段处理的高级查询.它知道如何处理全文字段(Full-text, analyzed)和精确值字段(Exact-value,not_analyzed)  
+> 基于全文字段处理的高级查询.它知道如何处理全文字段(Full-text, analyzed)和精确值字段(Exact-value,not_analyzed)  
 
 match查询处理：对用户输入的内容进行高级处理,比如对其进行分词处理,会分析输入内容的类型,如果是日期类型或数字类型,就会采用精确匹配,如果是一个文本内容,则
 会对其进行分析成词条(terms),然后采用比较低级的term查询进行处理,同时 Match Query提供了一些特性来更好的帮助我们优化搜索结果,比如fuzziness  

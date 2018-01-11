@@ -20,7 +20,7 @@ curl -XGET 'localhost:9200/tutorial/book/_search?pretty' -d '
 
 1. 对文档中的所有字段进行查询,包含"guide"
 ```
-curl -XGET 'localhost:9200/tutorial/book/_search?pretty' -d '
+curl -H "Content-Type:application/json" -XGET 'localhost:9200/tutorial/book/_search?pretty' -d '
 {
   "query": { 
         "multi_match": { 
