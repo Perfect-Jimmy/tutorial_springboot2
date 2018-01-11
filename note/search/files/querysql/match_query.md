@@ -21,4 +21,56 @@ curl -H "Content-Type:application/json" -XGET 'localhost:9200/tutorial/book/_sea
 3. 找到匹配的文档:term查询会在倒排索引中查询"guide",然后获取到含有该词条的文档列表并返回
 4. 对每份文档打分：term查询会为每份匹配的文档计算其相关度分值_score
 
-*注:相关度分值通过综合考虑词条频度(Term Frequency)("guide"在匹配的每份文档的title字段中出现的频繁程度),倒排频度(Inverted Document Frequency)("quick"在整个索引中的所有文档的title字段中的出现程度)，以及每个字段的长度(较短的字段会被认为相关度更高)来得到。参考什么是相关度(What is Relevance?)*
+*注:相关度分值通过综合考虑词条频度(Term Frequency)("guide"在匹配的每份文档的title字段中出现的频繁程度),倒排频度(Inverted Document Frequency)("quick"在整个索引中的所有文档的title字段中的出现程度),以及每个字段的长度(较短的字段会被认为相关度更高)来得到*
+
+> Fuzziness 模糊查询
+
+fuzziness指定编辑距离,取值0,1,2
+```
+curl -H "Content-Type:application/json" -XGET 'localhost:9200/tutorial/book/_search?pretty' -d '
+{
+  "query": { 
+        "match": { 
+              "title": {
+                    "query":"guude",
+                    "fuzziness":1
+              }
+        }
+  }
+}
+'
+```
+*使用场景:当用户输入一个短语或单词,可能输错了其中一个字母或汉字,此时系统应该发现这种情况并返回用户期望的结果*
+
+> Operator 控制并存性
+1. 查询title中包含"Elasticsearch"并且"Guide"的数据
+```
+curl -H "Content-Type:application/json" -XGET 'localhost:9200/tutorial/book/_search?pretty' -d '
+ {
+   "query": { 
+         "match": { 
+               "title": {
+                     "query":"Elasticsearch Guide",
+                     "operator": "and"
+               }
+         }
+   }
+ }
+ '
+```
+*注:查询内容"Elasticsearch Guide"被分析后成为两个词条("Elasticsearch","Guide")*
+2. 查询title中包含"Elasticsearch"或者"Guide"的数据
+```
+curl -H "Content-Type:application/json" -XGET 'localhost:9200/tutorial/book/_search?pretty' -d '
+ {
+   "query": { 
+         "match": { 
+               "title": {
+                     "query":"Elasticsearch Guide",
+                     "operator": "or"
+               }
+         }
+   }
+ }
+ '
+```
