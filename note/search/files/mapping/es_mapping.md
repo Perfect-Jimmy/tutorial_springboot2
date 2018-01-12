@@ -1,4 +1,4 @@
-### Mapping
+### Mapping 修改字段和类型
 
 > Mapping定义了type中的诸多字段的数据类型以及这些字段如何被Elasticsearch处理,比如一个字段是否可以查询以及如何分词等
 
