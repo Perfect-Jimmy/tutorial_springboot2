@@ -93,7 +93,7 @@ Elasticsearch 默认使用 standard analyzer
 ### 属性解析 [官网参数设置doc](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-params.html)
 description为field名称,type指定field类型,index指定索引类型,analyzer指定索引阶段和检索阶段分词类型
 
-> index 默认true. false时不可查询 
+> index 默认true. true:索引,可查询 false:不索引,不可查询
 
 > analyzer es默认使用standard analyzer分词器,还有其他内建分词器whitespace,simple,english
 例子:
@@ -179,5 +179,5 @@ curl  -H "Content-Type:application/json" -XGET "localhost:9200/_analyze?pretty" 
   ]
 }
 ```
-*说明:"A Pretty cool boy"被分成a,pretty,cool和boy索引起来*
+*说明:"A Pretty cool boy"被分成a,pretty,cool和boy索引起来即这4个单词都可以搜索到这条数据*
 
