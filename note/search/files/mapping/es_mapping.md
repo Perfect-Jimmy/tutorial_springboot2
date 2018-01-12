@@ -90,11 +90,94 @@ curl -H "Content-Type:application/json" -XPUT 'localhost:9200/product/phone/_map
 Elasticsearch 默认使用 standard analyzer
 
 
-### 属性解析
+### 属性解析 [官网参数设置doc](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-params.html)
 description为field名称,type指定field类型,index指定索引类型,analyzer指定索引阶段和检索阶段分词类型
 
-> index可选值
-> 1. analyzed: First analyze the string, then index it. In other words,index this field as full text  
-> 2. not_analyzed:: Index this field, so it is searchable, but index the value exactly as specified. Do not analyze it.     
-> 3.  no: Don’t index this field at all. This field will not be searchable.  
+> index 默认true. false时不可查询 
+
+> analyzer es默认使用standard analyzer分词器,还有其他内建分词器whitespace,simple,english
+例子:
+
+1. 新建索引
+```
+curl -H "Content-Type:application/json" -XPUT 'localhost:9200/testmapping?pretty'
+```
+2. 创建type并设置mapping
+```
+curl -H 'Content-Type: application/json' -XPUT "localhost:9200/testmapping/phone/_mapping?pretty" -d ' 
+{
+  "phone": {
+        "properties": {
+                 "description": {
+                      "type":"text",
+                      "index" : true,
+                      "analyzer": "standard"
+                 }
+        }
+  }
+}
+'
+```
+3. 创建文档
+```
+curl -H "Content-Type:application/json" -XPUT 'localhost:9200/testmapping/phone/1?pretty' -d ' 
+{
+   "description": "A Pretty cool boy"
+}'
+```
+4. 查询文档
+```
+curl -H "Content-Type:application/json" -XGET 'localhost:9200/testmapping/phone/_search?pretty' -d '
+{
+  "query": { 
+        "match": { "description": "A" } 
+      }
+}
+'
+```
+5. analysis文档
+```
+curl  -H "Content-Type:application/json" -XGET "localhost:9200/_analyze?pretty" -d'
+{
+  "analyzer": "standard",
+  "text":     "A Pretty cool boy"
+}
+'
+```
+结果:
+```
+{
+  "tokens" : [
+    {
+      "token" : "a",
+      "start_offset" : 0,
+      "end_offset" : 1,
+      "type" : "<ALPHANUM>",
+      "position" : 0
+    },
+    {
+      "token" : "pretty",
+      "start_offset" : 2,
+      "end_offset" : 8,
+      "type" : "<ALPHANUM>",
+      "position" : 1
+    },
+    {
+      "token" : "cool",
+      "start_offset" : 9,
+      "end_offset" : 13,
+      "type" : "<ALPHANUM>",
+      "position" : 2
+    },
+    {
+      "token" : "boy",
+      "start_offset" : 14,
+      "end_offset" : 17,
+      "type" : "<ALPHANUM>",
+      "position" : 3
+    }
+  ]
+}
+```
+*说明:"A Pretty cool boy"被分成a,pretty,cool和boy索引起来*
 
