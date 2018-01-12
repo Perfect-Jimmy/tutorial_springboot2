@@ -6,7 +6,7 @@
 ```
 ```
 精确值很容易查询,要么匹配查询,要么不匹配,用sql表示:  
-WHERE name    = "John Smith" AND user_id = 2 AND date    > "2014-09-15"
+WHERE name = "John Smith" AND user_id = 2 AND date > "2014-09-15"
 ```
 ```
 全文查询不只是"这个文档匹配查询吗",而是"该文档匹配查询的程度有多大",换句话说该文档与给定查询的相关性如何
