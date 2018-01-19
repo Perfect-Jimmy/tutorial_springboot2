@@ -116,6 +116,49 @@ curl  -H "Content-Type:application/json" -XGET "localhost:9200/_analyze?pretty" 
 
 ### elasticsearch-analysis-pinyin分词器安装
 pinyin分词器可以让用户输入拼音就查找到相关的关键词.比如输入zhonguo就能匹配到中国
-1. 下载elasticsearch-analysis-pinyin.zip,地址:https://github.com/medcl/elasticsearch-analysis-pinyin
-2. 上传到目录elasticsearch/plugins/,直接unzip,并重命名为py,删除zip包重启elasticsearch服务
+1. clone:https://github.com/medcl/elasticsearch-analysis-pinyin,使用maven打包
+2. target\releases\elasticsearch-analysis-pinyin-6.1.1.zip上传到目录elasticsearch/plugins/,直接unzip,并重命名为py,删除zip包重启elasticsearch服务
 3. 测试分词
+```
+curl  -H "Content-Type:application/json" -XGET "localhost:9200/_analyze?pretty" -d'
+{
+  "analyzer": "pinyin",
+  "text":     "刘德华"
+}
+'
+```
+结果:
+```
+{
+  "tokens" : [
+    {
+      "token" : "liu",
+      "start_offset" : 0,
+      "end_offset" : 0,
+      "type" : "word",
+      "position" : 0
+    },
+    {
+      "token" : "ldh",
+      "start_offset" : 0,
+      "end_offset" : 0,
+      "type" : "word",
+      "position" : 0
+    },
+    {
+      "token" : "de",
+      "start_offset" : 0,
+      "end_offset" : 0,
+      "type" : "word",
+      "position" : 1
+    },
+    {
+      "token" : "hua",
+      "start_offset" : 0,
+      "end_offset" : 0,
+      "type" : "word",
+      "position" : 2
+    }
+  ]
+}
+```
