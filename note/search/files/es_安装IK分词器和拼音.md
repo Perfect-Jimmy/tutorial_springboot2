@@ -1,5 +1,10 @@
 ### elasticsearch-analysis-ik分词器安装
 
+处理流程:
+1. character filter:文本分词前预处理,比如过滤html标签
+2. tokenizer:分词
+3. token filter:对每个单词进行normalization(时态转换,单复数转换,大小写转换,停用词,同义词等)
+
 Analyzer:  ik_smart  ik_max_word   
 Tokenizer: ik_smart  ik_max_word  
 * ik_smart:最少切分
